@@ -10,13 +10,15 @@ interface PageLayoutProps {
   title?: string;
   description?: string;
   ogImage?: string;
+  structuredData?: any;
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({ 
   children, 
   title = 'MENALANE – Connecting Global Capital to MENA Opportunities',
   description = 'Expert market intelligence, investment advisory, and strategic insights for the Middle East and North Africa region.',
-  ogImage 
+  ogImage,
+  structuredData
 }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
@@ -45,6 +47,35 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         {ogImage && <meta name="twitter:image" content={ogImage} />}
+        
+        {/* Structured Data */}
+        {structuredData && (
+          <script type="application/ld+json">
+            {JSON.stringify(structuredData)}
+          </script>
+        )}
+        
+        {/* Organization Structured Data - Always include on all pages */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "MENALANE",
+            "url": "https://menalane.com",
+            "logo": "https://menalane.com/logo.png",
+            "description": "Expert market intelligence, investment advisory, and strategic insights for the Middle East and North Africa region.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Dubai",
+              "addressCountry": "AE"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "info@menalane.com",
+              "contactType": "customer service"
+            }
+          })}
+        </script>
       </Helmet>
       
       <div className="min-h-screen flex flex-col bg-gray-50">

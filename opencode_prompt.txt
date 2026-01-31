@@ -1,18 +1,1056 @@
-You are continuing an application build. No features are marked complete yet. Your task is to implement ONLY the remaining features.
+You are an AI Software Engineer building a complete application. Your task is to set up the project AND implement all selected features.
 
-## Project Context
-- **Platform**: Vite React (Web)
-- **Frontend Root**: /app/vitereact
-- **Backend Root**: /app/backend
+## Project Description
+Create a professional, corporate-style website inspired by the structure, clarity, and credibility of JPMorgan Chase & Co.’s global website (https://www.jpmorgan.com/global
+), but fully adapted for the MENA (Middle East & North Africa) region.
 
-### Web App Requirements
-- Use React DOM components (no React Native primitives)
-- Keep changes within the existing Vite boilerplate
+Website name: MENALANE
 
-## Completed Features (Do NOT modify)
-None yet.
+Purpose:
+MENALANE is a regional financial and business intelligence platform focused on MENA markets. It provides insights, services, and resources for investors, corporations, institutions, and policymakers operating in the MENA region.
 
-## Remaining Features to Implement
+Design style:
+
+Premium, institutional, and trustworthy (similar to top-tier global banks)
+
+Clean typography, strong grid layout, lots of white space
+
+Dark blue / neutral professional color palette
+
+Subtle animations and smooth transitions
+
+Hero sections with bold headlines and background visuals related to MENA cities, finance, and trade
+
+Target audience:
+
+Investors and asset managers
+
+Corporations and enterprises
+
+Government and policy institutions
+
+High-net-worth individuals
+
+Business professionals interested in MENA markets
+
+Main pages and structure:
+
+Home
+
+Hero section: “MENALANE – Connecting Global Capital to MENA Opportunities”
+
+Overview of services
+
+Featured insights and reports
+
+Regional market highlights
+
+Call-to-action buttons (Explore Insights, Contact Us)
+
+About MENALANE
+
+Mission and vision
+
+Focus on MENA region
+
+Values: credibility, regional expertise, global standards
+
+Markets & Insights
+
+Subsections for:
+
+GCC
+
+North Africa
+
+Levant
+
+Articles, market outlooks, and economic analysis
+
+Services
+
+Investment advisory (conceptual)
+
+Market research & reports
+
+Corporate strategy & consulting
+
+Risk & geopolitical analysis
+
+Industries
+
+Energy
+
+Finance
+
+Infrastructure
+
+Technology
+
+Real Estate
+
+News & Reports
+
+Regular updates
+
+Downloadable reports
+
+Featured commentary
+
+Careers
+
+Join MENALANE
+
+Regional expertise focus
+
+Professional tone
+
+Contact
+
+Professional contact form
+
+Office locations (MENA-focused)
+
+General inquiry email
+
+Technical & UX requirements:
+
+Fully responsive (mobile, tablet, desktop)
+
+SEO-optimized structure
+
+Fast loading performance
+
+Accessible design (WCAG-friendly where possible)
+
+CMS-ready for articles and reports
+
+Tone of content:
+
+Authoritative, neutral, and professional
+
+مشابه لأسلوب المؤسسات المالية العالمية
+
+No casual language
+
+Branding:
+
+Logo text: MENALANE
+
+Tagline suggestion: “Global Insight. Regional Power.”
+
+Do not copy JPMorgan branding or content directly — only use it as inspiration for layout, hierarchy, and corporate feel. The site must be original and focused on the MENA region.
+
+## Phase 1: Project Setup
+
+**feature_list.json already exists at /app/feature_list.json** - The features have been pre-configured. Do NOT create or overwrite this file.
+Your task is to implement the features and update /app/feature_list.json when each is complete.
+
+Here are the features for reference:
+```json
+[
+  {
+    "id": "homepage-hero-section",
+    "category": "ui",
+    "description": "Display a prominent hero section on the homepage with the headline 'MENALANE – Connecting Global Capital to MENA Opportunities', background visuals of MENA cities/finance/trade, and primary CTA buttons. This is the first impression and must convey credibility and regional focus immediately.",
+    "steps": [
+      "Navigate to the homepage",
+      "Verify hero section displays with correct headline text",
+      "Verify background visual is high-quality and MENA-themed",
+      "Verify CTA buttons ('Explore Insights', 'Contact Us') are visible and clickable",
+      "Verify hero section is responsive on mobile, tablet, and desktop"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 1
+  },
+  {
+    "id": "homepage-services-overview",
+    "category": "ui",
+    "description": "Display an overview section of key services (Investment advisory, Market research, Corporate strategy, Risk analysis) on homepage with brief descriptions and links to detailed service pages. Users need to quickly understand what MENALANE offers.",
+    "steps": [
+      "Scroll to services overview section on homepage",
+      "Verify all 4 service categories are displayed with icons/visuals",
+      "Verify each service has a brief description (2-3 sentences)",
+      "Click on each service link and verify navigation to correct service detail page",
+      "Verify section layout is clean with proper spacing"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 2
+  },
+  {
+    "id": "homepage-featured-insights",
+    "category": "data",
+    "description": "Display 3-4 featured insights/reports on homepage with thumbnails, titles, brief excerpts, and publication dates. This showcases thought leadership and keeps content fresh for returning visitors.",
+    "steps": [
+      "Scroll to featured insights section on homepage",
+      "Verify 3-4 insight cards are displayed",
+      "Verify each card shows thumbnail image, title, excerpt, and date",
+      "Click on an insight card and verify navigation to full article",
+      "Verify insights are sorted by most recent or featured status"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 3
+  },
+  {
+    "id": "primary-navigation-menu",
+    "category": "navigation",
+    "description": "Implement a sticky top navigation bar with links to all main pages (Home, About, Markets & Insights, Services, Industries, News & Reports, Careers, Contact). Essential for site-wide navigation and professional appearance.",
+    "steps": [
+      "Load any page on the website",
+      "Verify navigation bar is visible at top with MENALANE logo on left",
+      "Verify all main menu items are present and correctly labeled",
+      "Click each menu item and verify navigation to correct page",
+      "Scroll down page and verify navigation bar remains sticky/fixed at top"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 4
+  },
+  {
+    "id": "homepage-market-highlights",
+    "category": "data",
+    "description": "Display regional market highlights section showing key metrics, trends, or data points for GCC, North Africa, and Levant regions. Provides immediate value and demonstrates expertise to investors and professionals.",
+    "steps": [
+      "Scroll to market highlights section on homepage",
+      "Verify data for all 3 regions (GCC, North Africa, Levant) is displayed",
+      "Verify each region shows relevant metrics or trends",
+      "Verify data is presented in clean, scannable format (cards or grid)",
+      "Verify links to detailed market pages work correctly"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 5
+  },
+  {
+    "id": "responsive-mobile-navigation",
+    "category": "navigation",
+    "description": "Implement hamburger menu for mobile devices that expands to show all navigation links. Critical for mobile user experience as target audience includes busy professionals on-the-go.",
+    "steps": [
+      "Resize browser to mobile width or use mobile device",
+      "Verify hamburger menu icon appears in navigation bar",
+      "Tap hamburger icon and verify menu expands with all links",
+      "Tap a menu link and verify navigation works correctly",
+      "Verify menu closes after selection or when tapping outside"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 6
+  },
+  {
+    "id": "about-page-mission-vision",
+    "category": "ui",
+    "description": "Display About MENALANE page with mission statement, vision, and focus on MENA region. Establishes credibility and helps users understand the platform's purpose and regional expertise.",
+    "steps": [
+      "Navigate to About page from main menu",
+      "Verify page displays clear mission statement",
+      "Verify vision section explains long-term goals",
+      "Verify content emphasizes MENA regional focus",
+      "Verify professional tone and layout with appropriate imagery"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 7
+  },
+  {
+    "id": "about-page-values",
+    "category": "ui",
+    "description": "Display core values section on About page highlighting credibility, regional expertise, and global standards. Reinforces trust with institutional investors and corporate clients.",
+    "steps": [
+      "Navigate to About page",
+      "Scroll to values section",
+      "Verify all 3 values are displayed: credibility, regional expertise, global standards",
+      "Verify each value has supporting description or visual",
+      "Verify section uses professional design consistent with brand"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 8
+  },
+  {
+    "id": "markets-insights-landing-page",
+    "category": "ui",
+    "description": "Create Markets & Insights landing page with overview and navigation to three regional subsections (GCC, North Africa, Levant). Serves as hub for all market intelligence content.",
+    "steps": [
+      "Navigate to Markets & Insights from main menu",
+      "Verify page displays overview of market intelligence offerings",
+      "Verify three regional subsections are clearly presented",
+      "Click on each regional subsection and verify navigation works",
+      "Verify page layout follows professional grid structure"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 9
+  },
+  {
+    "id": "markets-gcc-subsection",
+    "category": "data",
+    "description": "Display GCC markets subsection with articles, market outlooks, and economic analysis specific to Gulf Cooperation Council countries. Critical for users focused on this high-value region.",
+    "steps": [
+      "Navigate to Markets & Insights > GCC",
+      "Verify page displays GCC-specific content and analysis",
+      "Verify articles/reports are listed with titles, dates, and excerpts",
+      "Click on an article and verify full content loads",
+      "Verify content is filterable or sortable by date/topic"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 10
+  },
+  {
+    "id": "markets-north-africa-subsection",
+    "category": "data",
+    "description": "Display North Africa markets subsection with region-specific articles, outlooks, and analysis. Serves investors and businesses interested in North African markets.",
+    "steps": [
+      "Navigate to Markets & Insights > North Africa",
+      "Verify page displays North Africa-specific content",
+      "Verify articles/reports are listed with metadata",
+      "Click on an article and verify navigation to full content",
+      "Verify regional focus is clear in content and visuals"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 11
+  },
+  {
+    "id": "markets-levant-subsection",
+    "category": "data",
+    "description": "Display Levant markets subsection with region-specific articles, outlooks, and analysis. Addresses needs of users interested in Levantine markets.",
+    "steps": [
+      "Navigate to Markets & Insights > Levant",
+      "Verify page displays Levant-specific content",
+      "Verify articles/reports are listed appropriately",
+      "Click on an article and verify full content displays",
+      "Verify content quality and regional relevance"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 12
+  },
+  {
+    "id": "article-detail-page",
+    "category": "ui",
+    "description": "Display full article/insight page with title, author, date, featured image, full content, and related articles. Essential for content consumption and keeping users engaged.",
+    "steps": [
+      "Click on any article from Markets & Insights or News sections",
+      "Verify article displays with proper title and metadata",
+      "Verify featured image appears at top of article",
+      "Verify full article content is readable with proper typography",
+      "Verify related articles section appears at bottom"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 13
+  },
+  {
+    "id": "services-landing-page",
+    "category": "ui",
+    "description": "Create Services landing page showcasing all four service offerings with descriptions and CTAs. Helps potential clients understand service offerings and drives lead generation.",
+    "steps": [
+      "Navigate to Services from main menu",
+      "Verify page displays all 4 services: Investment advisory, Market research, Corporate strategy, Risk analysis",
+      "Verify each service has detailed description",
+      "Verify CTAs are present (e.g., 'Learn More', 'Contact Us')",
+      "Verify professional layout with appropriate visuals"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 14
+  },
+  {
+    "id": "service-investment-advisory-detail",
+    "category": "ui",
+    "description": "Display detailed page for Investment Advisory service with comprehensive description, benefits, approach, and contact CTA. Targets investors and asset managers seeking advisory services.",
+    "steps": [
+      "Navigate to Services > Investment Advisory",
+      "Verify page displays comprehensive service description",
+      "Verify benefits and approach are clearly outlined",
+      "Verify contact CTA is prominent",
+      "Verify page includes relevant imagery or graphics"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 15
+  },
+  {
+    "id": "service-market-research-detail",
+    "category": "ui",
+    "description": "Display detailed page for Market Research & Reports service with description, sample reports, and subscription/purchase options. Key revenue driver for the platform.",
+    "steps": [
+      "Navigate to Services > Market Research & Reports",
+      "Verify page displays service description and value proposition",
+      "Verify sample reports or report types are showcased",
+      "Verify CTA for accessing or purchasing reports is clear",
+      "Verify page demonstrates expertise and credibility"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 16
+  },
+  {
+    "id": "service-corporate-strategy-detail",
+    "category": "ui",
+    "description": "Display detailed page for Corporate Strategy & Consulting service targeting enterprises and corporations. Explains consulting offerings for MENA market entry and expansion.",
+    "steps": [
+      "Navigate to Services > Corporate Strategy & Consulting",
+      "Verify page displays consulting service details",
+      "Verify target audience (corporations/enterprises) is clear",
+      "Verify case studies or approach methodology is presented",
+      "Verify contact CTA is available"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 17
+  },
+  {
+    "id": "service-risk-analysis-detail",
+    "category": "ui",
+    "description": "Display detailed page for Risk & Geopolitical Analysis service. Critical for institutional clients concerned about MENA region stability and risk factors.",
+    "steps": [
+      "Navigate to Services > Risk & Geopolitical Analysis",
+      "Verify page displays risk analysis service description",
+      "Verify geopolitical expertise is highlighted",
+      "Verify types of risk analysis offered are clear",
+      "Verify contact CTA is prominent"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 18
+  },
+  {
+    "id": "industries-landing-page",
+    "category": "ui",
+    "description": "Create Industries landing page showcasing five key sectors (Energy, Finance, Infrastructure, Technology, Real Estate) with navigation to detailed pages. Helps users find sector-specific insights.",
+    "steps": [
+      "Navigate to Industries from main menu",
+      "Verify page displays all 5 industries with icons/visuals",
+      "Verify each industry has brief description",
+      "Click on each industry and verify navigation to detail page",
+      "Verify layout is clean and professional"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 19
+  },
+  {
+    "id": "industry-energy-detail",
+    "category": "ui",
+    "description": "Display Energy industry page with sector overview, trends, insights, and related articles. Critical given MENA's significance in global energy markets.",
+    "steps": [
+      "Navigate to Industries > Energy",
+      "Verify page displays energy sector overview for MENA",
+      "Verify current trends and insights are presented",
+      "Verify related articles/reports are listed",
+      "Verify content demonstrates sector expertise"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 20
+  },
+  {
+    "id": "industry-finance-detail",
+    "category": "ui",
+    "description": "Display Finance industry page with banking, fintech, and financial services insights for MENA region. Highly relevant to target audience of investors and financial professionals.",
+    "steps": [
+      "Navigate to Industries > Finance",
+      "Verify page displays finance sector overview",
+      "Verify subsectors (banking, fintech, etc.) are covered",
+      "Verify related insights and articles are available",
+      "Verify content quality and relevance"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 21
+  },
+  {
+    "id": "industry-infrastructure-detail",
+    "category": "ui",
+    "description": "Display Infrastructure industry page covering construction, transportation, and development projects in MENA. Important for corporate and government audiences.",
+    "steps": [
+      "Navigate to Industries > Infrastructure",
+      "Verify page displays infrastructure sector overview",
+      "Verify major projects or trends are highlighted",
+      "Verify related content is accessible",
+      "Verify page demonstrates regional expertise"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 22
+  },
+  {
+    "id": "industry-technology-detail",
+    "category": "ui",
+    "description": "Display Technology industry page covering tech sector growth, startups, and digital transformation in MENA. Appeals to tech investors and innovation-focused audience.",
+    "steps": [
+      "Navigate to Industries > Technology",
+      "Verify page displays technology sector overview",
+      "Verify emerging trends and opportunities are highlighted",
+      "Verify related articles and insights are listed",
+      "Verify content is current and relevant"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 23
+  },
+  {
+    "id": "industry-real-estate-detail",
+    "category": "ui",
+    "description": "Display Real Estate industry page covering property markets, development, and investment opportunities in MENA. Targets real estate investors and developers.",
+    "steps": [
+      "Navigate to Industries > Real Estate",
+      "Verify page displays real estate sector overview",
+      "Verify market trends and opportunities are presented",
+      "Verify related content is available",
+      "Verify regional market data is included"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 24
+  },
+  {
+    "id": "news-reports-listing-page",
+    "category": "data",
+    "description": "Display News & Reports page with chronological listing of all updates, articles, and reports with filtering and pagination. Central hub for all published content.",
+    "steps": [
+      "Navigate to News & Reports from main menu",
+      "Verify page displays list of all news items and reports",
+      "Verify each item shows title, date, excerpt, and thumbnail",
+      "Verify items are sorted by date (newest first)",
+      "Verify pagination or infinite scroll works correctly"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 25
+  },
+  {
+    "id": "news-reports-filtering",
+    "category": "functional",
+    "description": "Implement filtering options for News & Reports by category (region, industry, content type). Helps users quickly find relevant content in growing content library.",
+    "steps": [
+      "Navigate to News & Reports page",
+      "Verify filter options are visible (region, industry, type)",
+      "Select a filter option and verify content updates accordingly",
+      "Select multiple filters and verify combined filtering works",
+      "Clear filters and verify all content displays again"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 26
+  },
+  {
+    "id": "downloadable-reports-feature",
+    "category": "functional",
+    "description": "Enable users to download PDF reports from report detail pages. Key feature for providing value to professional audience and potential lead generation.",
+    "steps": [
+      "Navigate to a report detail page",
+      "Verify download button/link is clearly visible",
+      "Click download button and verify PDF download initiates",
+      "Verify downloaded PDF is properly formatted and complete",
+      "Verify download tracking or gating works if implemented"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 27
+  },
+  {
+    "id": "featured-commentary-section",
+    "category": "data",
+    "description": "Display featured commentary section on News & Reports page highlighting expert opinions and analysis. Showcases thought leadership and expertise.",
+    "steps": [
+      "Navigate to News & Reports page",
+      "Verify featured commentary section is prominently displayed",
+      "Verify 2-3 featured commentaries are shown with author info",
+      "Click on a commentary and verify full content loads",
+      "Verify commentaries are distinct from regular news items"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 28
+  },
+  {
+    "id": "careers-page-overview",
+    "category": "ui",
+    "description": "Display Careers page with company culture, benefits, and 'Join MENALANE' messaging emphasizing regional expertise focus. Attracts talent with MENA expertise.",
+    "steps": [
+      "Navigate to Careers from main menu",
+      "Verify page displays company culture and values",
+      "Verify benefits and opportunities are highlighted",
+      "Verify regional expertise focus is emphasized",
+      "Verify professional tone matches brand"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 29
+  },
+  {
+    "id": "careers-job-listings",
+    "category": "data",
+    "description": "Display current job openings with titles, locations, and descriptions. Essential for recruiting talent and showing company growth.",
+    "steps": [
+      "Navigate to Careers page",
+      "Scroll to job listings section",
+      "Verify open positions are listed with title and location",
+      "Click on a job listing and verify full description displays",
+      "Verify application instructions or CTA is clear"
+    ],
+    "priority": 3,
+    "passes": false,
+    "selected": true,
+    "order": 30
+  },
+  {
+    "id": "contact-page-form",
+    "category": "functional",
+    "description": "Implement professional contact form with fields for name, email, company, subject, and message. Primary channel for lead generation and client inquiries.",
+    "steps": [
+      "Navigate to Contact page from main menu",
+      "Verify contact form displays with all required fields",
+      "Fill out form with valid information",
+      "Submit form and verify success message appears",
+      "Verify form validation works for invalid inputs"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 31
+  },
+  {
+    "id": "contact-page-office-locations",
+    "category": "ui",
+    "description": "Display MENA office locations with addresses and contact information. Reinforces regional presence and credibility with local clients.",
+    "steps": [
+      "Navigate to Contact page",
+      "Verify office locations section is displayed",
+      "Verify each office shows address and contact details",
+      "Verify locations are MENA-focused (e.g., Dubai, Cairo, Riyadh)",
+      "Verify map integration or visual representation if included"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 32
+  },
+  {
+    "id": "contact-page-general-inquiry-email",
+    "category": "ui",
+    "description": "Display general inquiry email address prominently on Contact page. Provides alternative contact method for users who prefer email.",
+    "steps": [
+      "Navigate to Contact page",
+      "Verify general inquiry email is clearly displayed",
+      "Verify email is formatted as clickable mailto link",
+      "Click email link and verify email client opens",
+      "Verify email address follows professional format"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 33
+  },
+  {
+    "id": "footer-navigation",
+    "category": "navigation",
+    "description": "Implement comprehensive footer with links to all main pages, social media, legal pages, and contact info. Standard for professional websites and improves navigation.",
+    "steps": [
+      "Scroll to bottom of any page",
+      "Verify footer displays with organized link sections",
+      "Verify all main page links are present and working",
+      "Verify contact information is displayed",
+      "Verify footer design matches brand style"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 34
+  },
+  {
+    "id": "footer-social-media-links",
+    "category": "navigation",
+    "description": "Display social media icons in footer linking to MENALANE's LinkedIn, Twitter, and other professional platforms. Important for brand presence and engagement.",
+    "steps": [
+      "Scroll to footer on any page",
+      "Verify social media icons are displayed",
+      "Click each icon and verify it opens correct social media profile in new tab",
+      "Verify icons are professional and properly styled",
+      "Verify at minimum LinkedIn and Twitter are included"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 35
+  },
+  {
+    "id": "search-functionality",
+    "category": "functional",
+    "description": "Implement site-wide search allowing users to search articles, reports, and pages by keyword. Critical for users looking for specific content in growing content library.",
+    "steps": [
+      "Locate search icon/box in navigation bar",
+      "Click search and verify search input appears",
+      "Enter a keyword and submit search",
+      "Verify search results page displays relevant content",
+      "Verify results show title, excerpt, and link to full content"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 36
+  },
+  {
+    "id": "newsletter-subscription",
+    "category": "functional",
+    "description": "Implement newsletter subscription form in footer or dedicated section to capture emails for updates. Key lead generation and audience building tool.",
+    "steps": [
+      "Locate newsletter subscription form (footer or homepage)",
+      "Enter email address in subscription field",
+      "Submit form and verify success message appears",
+      "Verify email validation works for invalid formats",
+      "Verify confirmation email is sent if double opt-in is used"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 37
+  },
+  {
+    "id": "loading-states",
+    "category": "ui",
+    "description": "Implement loading indicators for all async operations (page loads, form submissions, content fetching). Provides feedback and improves perceived performance.",
+    "steps": [
+      "Navigate to a content-heavy page",
+      "Verify loading indicator appears while content loads",
+      "Submit a form and verify loading state during submission",
+      "Verify loading indicators are styled consistently",
+      "Verify loading states don't block critical UI elements"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 38
+  },
+  {
+    "id": "error-states",
+    "category": "ui",
+    "description": "Implement error messages and states for failed operations (form errors, 404 pages, server errors). Essential for user experience and troubleshooting.",
+    "steps": [
+      "Navigate to non-existent URL and verify 404 page displays",
+      "Submit form with invalid data and verify error messages appear",
+      "Verify error messages are clear and actionable",
+      "Verify 404 page includes navigation back to main site",
+      "Verify error styling is consistent with brand"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 39
+  },
+  {
+    "id": "breadcrumb-navigation",
+    "category": "navigation",
+    "description": "Implement breadcrumb navigation on all sub-pages showing page hierarchy. Helps users understand site structure and navigate back to parent pages.",
+    "steps": [
+      "Navigate to a deep page (e.g., specific article or service detail)",
+      "Verify breadcrumb trail appears below header",
+      "Verify breadcrumb shows full path (Home > Section > Current Page)",
+      "Click on breadcrumb links and verify navigation works",
+      "Verify breadcrumbs are responsive on mobile"
+    ],
+    "priority": 3,
+    "passes": false,
+    "selected": true,
+    "order": 40
+  },
+  {
+    "id": "related-content-recommendations",
+    "category": "functional",
+    "description": "Display related articles/reports at bottom of content pages based on region, industry, or topic. Increases engagement and time on site.",
+    "steps": [
+      "Navigate to any article or report detail page",
+      "Scroll to bottom of content",
+      "Verify 'Related Content' section displays 3-4 items",
+      "Verify related items are actually relevant to current content",
+      "Click on a related item and verify navigation works"
+    ],
+    "priority": 3,
+    "passes": false,
+    "selected": true,
+    "order": 41
+  },
+  {
+    "id": "content-sharing-buttons",
+    "category": "functional",
+    "description": "Add social sharing buttons on article/report pages for LinkedIn, Twitter, and email. Enables content distribution and increases reach.",
+    "steps": [
+      "Navigate to an article detail page",
+      "Verify sharing buttons are visible (LinkedIn, Twitter, Email)",
+      "Click LinkedIn share and verify share dialog opens with correct content",
+      "Click Twitter share and verify tweet dialog opens with article link",
+      "Click email share and verify mailto link or email form works"
+    ],
+    "priority": 3,
+    "passes": false,
+    "selected": true,
+    "order": 42
+  },
+  {
+    "id": "cms-content-management",
+    "category": "functional",
+    "description": "Implement CMS backend for managing articles, reports, and page content. Essential for non-technical team to update content regularly.",
+    "steps": [
+      "Access CMS admin panel",
+      "Create a new article with title, content, and metadata",
+      "Publish article and verify it appears on frontend",
+      "Edit existing article and verify changes reflect on frontend",
+      "Delete or unpublish article and verify it's removed from frontend"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 43
+  },
+  {
+    "id": "cms-media-library",
+    "category": "functional",
+    "description": "Implement media library in CMS for uploading and managing images, PDFs, and other assets. Necessary for content creators to add visuals to articles.",
+    "steps": [
+      "Access CMS media library",
+      "Upload an image file and verify it's stored",
+      "Insert uploaded image into article and verify it displays",
+      "Upload a PDF report and verify it's accessible",
+      "Delete a media file and verify it's removed from library"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 44
+  },
+  {
+    "id": "page-meta-seo",
+    "category": "functional",
+    "description": "Implement proper meta tags (title, description, OG tags) on all pages for SEO and social sharing. Critical for search visibility and professional social media presence.",
+    "steps": [
+      "View page source of homepage",
+      "Verify title tag is present and descriptive",
+      "Verify meta description is present and compelling",
+      "Verify Open Graph tags are present for social sharing",
+      "Share page on social media and verify preview looks correct"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 45
+  },
+  {
+    "id": "structured-data-markup",
+    "category": "functional",
+    "description": "Implement schema.org structured data for articles, organization, and breadcrumbs. Improves search engine understanding and rich snippet potential.",
+    "steps": [
+      "View page source of article page",
+      "Verify JSON-LD structured data is present",
+      "Verify Article schema includes author, date, headline",
+      "Test structured data with Google Rich Results Test",
+      "Verify Organization schema is present on homepage"
+    ],
+    "priority": 3,
+    "passes": false,
+    "selected": true,
+    "order": 46
+  },
+  {
+    "id": "performance-optimization",
+    "category": "functional",
+    "description": "Optimize page load performance with image compression, lazy loading, and code minification. Essential for professional user experience and SEO.",
+    "steps": [
+      "Load homepage and measure page load time",
+      "Verify page loads in under 3 seconds on good connection",
+      "Scroll down page and verify images lazy load",
+      "Check network tab and verify assets are compressed",
+      "Run Lighthouse audit and verify performance score above 85"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 47
+  },
+  {
+    "id": "mobile-responsive-design",
+    "category": "ui",
+    "description": "Ensure all pages are fully responsive and optimized for mobile, tablet, and desktop viewports. Critical as many professionals access content on mobile devices.",
+    "steps": [
+      "Open site on mobile device or resize browser to mobile width",
+      "Navigate through all main pages and verify layout adapts properly",
+      "Verify text is readable without zooming",
+      "Verify buttons and links are easily tappable",
+      "Test on tablet size and verify appropriate layout"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 48
+  },
+  {
+    "id": "typography-system",
+    "category": "ui",
+    "description": "Implement consistent typography system with clear hierarchy (headings, body, captions) matching professional corporate style. Essential for readability and brand consistency.",
+    "steps": [
+      "Navigate through various pages",
+      "Verify heading sizes follow clear hierarchy (H1 > H2 > H3)",
+      "Verify body text is readable with appropriate size and line height",
+      "Verify font family is professional and consistent throughout",
+      "Verify typography scales appropriately on mobile"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 49
+  },
+  {
+    "id": "color-palette-implementation",
+    "category": "ui",
+    "description": "Implement dark blue and neutral professional color palette consistently across all pages and components. Establishes brand identity and corporate credibility.",
+    "steps": [
+      "Navigate through all main pages",
+      "Verify primary color (dark blue) is used consistently for headers, CTAs",
+      "Verify neutral colors are used for backgrounds and text",
+      "Verify color contrast meets readability standards",
+      "Verify color usage matches brand guidelines"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 50
+  },
+  {
+    "id": "animation-transitions",
+    "category": "ui",
+    "description": "Implement subtle animations and smooth transitions for hover states, page transitions, and scroll effects. Enhances premium feel without being distracting.",
+    "steps": [
+      "Hover over buttons and links and verify smooth hover transitions",
+      "Navigate between pages and verify smooth transitions if implemented",
+      "Scroll down pages and verify subtle scroll animations on elements",
+      "Verify animations are subtle and professional, not excessive",
+      "Verify animations don't cause performance issues"
+    ],
+    "priority": 3,
+    "passes": false,
+    "selected": true,
+    "order": 51
+  },
+  {
+    "id": "logo-branding-display",
+    "category": "ui",
+    "description": "Display MENALANE logo consistently in header with tagline 'Global Insight. Regional Power.' in appropriate locations. Establishes brand identity.",
+    "steps": [
+      "Navigate to homepage",
+      "Verify MENALANE logo is displayed in header",
+      "Verify logo is clickable and links to homepage",
+      "Verify tagline appears on homepage hero or about page",
+      "Verify logo scales appropriately on mobile"
+    ],
+    "priority": 1,
+    "passes": false,
+    "selected": true,
+    "order": 52
+  },
+  {
+    "id": "cta-buttons-consistency",
+    "category": "ui",
+    "description": "Implement consistent CTA button styling and placement throughout site (Explore Insights, Contact Us, Learn More, etc.). Drives user actions and conversions.",
+    "steps": [
+      "Navigate through various pages",
+      "Verify CTA buttons use consistent styling (color, size, shape)",
+      "Verify CTAs are prominently placed and easy to find",
+      "Hover over CTAs and verify hover states work",
+      "Click CTAs and verify they lead to appropriate destinations"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 53
+  },
+  {
+    "id": "form-validation",
+    "category": "functional",
+    "description": "Implement client-side form validation for all forms (contact, newsletter, etc.) with clear error messages. Prevents submission errors and improves user experience.",
+    "steps": [
+      "Navigate to contact form",
+      "Try submitting form with empty required fields",
+      "Verify error messages appear for missing fields",
+      "Enter invalid email format and verify validation error",
+      "Fill form correctly and verify submission succeeds"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 54
+  },
+  {
+    "id": "success-confirmation-messages",
+    "category": "ui",
+    "description": "Display success messages after form submissions and user actions. Provides feedback that action was completed successfully.",
+    "steps": [
+      "Submit contact form with valid data",
+      "Verify success message appears confirming submission",
+      "Subscribe to newsletter and verify success confirmation",
+      "Verify success messages are clearly visible and styled appropriately",
+      "Verify success messages auto-dismiss or have close button"
+    ],
+    "priority": 2,
+    "passes": false,
+    "selected": true,
+    "order": 55
+  },
+  {
+    "id": "back-to-top-button",
+    "category": "navigation",
+    "description": "Implement 'back to top' button that appears when scrolling down long pages. Improves navigation on content-heavy pages.",
+    "steps": [
+      "Navigate to a long article or page",
+      "Scroll down significantly",
+      "Verify 'back to top' button appears",
+      "Click button and verify smooth scroll to top of page",
+      "Verify button disappears when near top of page"
+    ],
+    "priority": 4,
+    "passes": false,
+    "selected": true,
+    "order": 56
+  }
+]
+```
+
+1. **Set up project structure** based on the boilerplate (init.sh is already provided used to run project)
+
+## Phase 2: Implement ALL Selected Features
 
 You MUST implement the following 56 features in order:
 
@@ -74,26 +1112,75 @@ You MUST implement the following 56 features in order:
 56. **back-to-top-button** (navigation): Implement 'back to top' button that appears when scrolling down long pages. Improves navigation on content-heavy pages.
 
 ### Implementation Order (Frontend First)
-For each feature, follow this exact order:
+For each feature, follow this exact order to create early user-visible impact:
 1. **UI First**: Build screens/components with mock data and polished styling.
 2. **Types Second**: Add/adjust shared types/interfaces used by the UI and API.
 3. **Backend Last**: Implement API/database changes and wire the UI to real data.
-
-### Feature Progress Tracking (CRITICAL)
-You MUST update feature_list.json to track progress as you work on each feature:
-
-1. **Before starting a feature**: Update feature_list.json to set `"status": "in_progress"` for that feature
-2. **After completing a feature**: Update feature_list.json to set `"status": "completed"` AND `"passes": true`
-3. **If a feature fails**: Update feature_list.json to set `"status": "failed"` AND add `"errorMessage": "description of what failed"`
-
-Update feature_list.json IMMEDIATELY after completing each feature.
 
 ### Implementation Rules
 - Implement each feature fully with proper error handling
 - After implementing each feature, use Playwright MCP to browser test it before marking as complete
 - Navigate to the preview, interact with the feature, and verify it works correctly
-- After implementing each feature, update feature_list.json to set "passes": true
-- After marking a feature complete, call the update_feature_progress tool
+- After implementing each feature, update /app/feature_list.json to set "passes": true for that feature
+- After marking a feature complete in /app/feature_list.json, call the update_feature_progress tool with the featureId to notify the UI immediately (the user will see real-time progress)
+- Use proper TypeScript types throughout
+- Follow React best practices
+
+### Feature Progress Tracking (CRITICAL)
+You MUST update /app/feature_list.json to track progress as you work on each feature:
+
+1. **Before starting a feature**: Update /app/feature_list.json to set `"status": "in_progress"` for that feature
+2. **After completing a feature**: Update /app/feature_list.json to set `"status": "completed"` AND `"passes": true`
+3. **If a feature fails**: Update /app/feature_list.json to set `"status": "failed"` AND add `"errorMessage": "description of what failed"`
+
+Example of updating /app/feature_list.json:
+```javascript
+// Read the current feature list
+const features = JSON.parse(fs.readFileSync('/app/feature_list.json', 'utf8'));
+
+// Find and update the feature you're working on
+const idx = features.findIndex(f => f.id === 'the-feature-id');
+features[idx] = {
+  ...features[idx],
+  status: 'completed',  // Use 'in_progress', 'completed', or 'failed'
+  passes: true,         // Set to true only when feature is fully working
+  completedAt: new Date().toISOString()
+};
+
+// Write back IMMEDIATELY after each feature
+fs.writeFileSync('/app/feature_list.json', JSON.stringify(features, null, 2));
+```
+
+**IMPORTANT**: Update /app/feature_list.json IMMEDIATELY after completing each feature. This enables real-time progress tracking in the UI so the user can see your progress.
+
+## Phase 3: Finalize
+- Initialize the database
+- Create progress log
+
+## Phase 4: Verify Code Quality (REQUIRED)
+
+Before marking any feature as complete, you MUST run these verification commands:
+
+1. **TypeScript Check** - Run in both frontend and backend:
+```bash
+cd /app/vitereact && npx tsc -b
+cd /app/backend && npx tsc -b
+```
+Fix ALL type errors before proceeding.
+
+2. **Lint Check** - Run in frontend:
+```bash
+cd /app/vitereact && npm run lint
+```
+Fix ALL lint errors before proceeding.
+
+3. **Build Check** - Verify production build succeeds:
+```bash
+cd /app/vitereact && npm run build
+```
+Fix ALL build errors before proceeding.
+
+Only after ALL verification steps pass can you mark features as "passes": true in feature_list.json.
 
 ## AI Integration (LaunchPulse AI Proxy)
 

@@ -5,13 +5,28 @@ import { motion } from 'framer-motion';
 import PageLayout from '@/components/PageLayout';
 import { fetchContent } from '@/lib/api';
 import { Calendar, FileText, ArrowRight, Filter } from 'lucide-react';
+import type { ContentType, RegionType, IndustryType } from '@/types';
 
 const NewsReportsPage: React.FC = () => {
-  const [filters, setFilters] = useState({ type: '', region: '', industry: '' });
+  const [filters, setFilters] = useState<{
+    type: ContentType | '';
+    region: RegionType | '';
+    industry: IndustryType | '';
+  }>({ type: '', region: '', industry: '' });
 
   const { data, isLoading } = useQuery({
     queryKey: ['all-content', filters],
-    queryFn: () => fetchContent(filters),
+    queryFn: () => fetchContent({
+      ...(filters.type && { type: filters.type as ContentType }),
+      ...(filters.region && { region: filters.region as RegionType }),
+      ...(filters.industry && { industry: filters.industry as IndustryType }),
+    }),
+  });
+
+  // Fetch featured commentary
+  const { data: commentaryData } = useQuery({
+    queryKey: ['featured-commentary'],
+    queryFn: () => fetchContent({ type: 'commentary', limit: 3 }),
   });
 
   return (
@@ -41,7 +56,7 @@ const NewsReportsPage: React.FC = () => {
             <Filter className="w-5 h-5 text-gray-600" />
             <select
               value={filters.type}
-              onChange={(e) => setFilters({ ...filters, type: e.target.value })}
+              onChange={(e) => setFilters({ ...filters, type: e.target.value as ContentType | '' })}
               className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All Types</option>
@@ -51,7 +66,7 @@ const NewsReportsPage: React.FC = () => {
             </select>
             <select
               value={filters.region}
-              onChange={(e) => setFilters({ ...filters, region: e.target.value })}
+              onChange={(e) => setFilters({ ...filters, region: e.target.value as RegionType | '' })}
               className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All Regions</option>
@@ -61,7 +76,7 @@ const NewsReportsPage: React.FC = () => {
             </select>
             <select
               value={filters.industry}
-              onChange={(e) => setFilters({ ...filters, industry: e.target.value })}
+              onChange={(e) => setFilters({ ...filters, industry: e.target.value as IndustryType | '' })}
               className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All Industries</option>
@@ -74,6 +89,50 @@ const NewsReportsPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Featured Commentary */}
+      {commentaryData?.content && commentaryData.content.length > 0 && (
+        <section className="py-12 lg:py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Commentary</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {commentaryData.content.map((item: any) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="bg-blue-50 rounded-lg p-6 border-l-4 border-blue-900"
+                >
+                  <Link to={`/article/${item.slug}`}>
+                    <div className="flex items-center text-sm text-gray-600 mb-3">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {new Date(item.published_at).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-900 transition-colors">
+                      {item.title}
+                    </h3>
+                    {item.author && (
+                      <p className="text-sm text-gray-700 mb-3">By {item.author}</p>
+                    )}
+                    <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                      {item.excerpt}
+                    </p>
+                    <div className="flex items-center text-blue-900 font-medium text-sm">
+                      Read Commentary
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Content Grid */}
       <section className="py-16 bg-gray-50">

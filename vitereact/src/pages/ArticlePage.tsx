@@ -69,10 +69,36 @@ const ArticlePage: React.FC = () => {
 
   const { content, related } = data;
 
+  // Structured data for article
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": content.title,
+    "description": content.excerpt,
+    "author": {
+      "@type": "Person",
+      "name": content.author
+    },
+    "datePublished": content.published_at,
+    "publisher": {
+      "@type": "Organization",
+      "name": "MENALANE",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://menalane.com/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": window.location.href
+    }
+  };
+
   return (
     <PageLayout
       title={`${content.title} | MENALANE`}
       description={content.excerpt}
+      structuredData={structuredData}
     >
       {/* Breadcrumb */}
       <div className="bg-gray-50 border-b border-gray-200">

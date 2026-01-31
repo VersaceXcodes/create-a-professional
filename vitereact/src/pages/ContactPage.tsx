@@ -14,11 +14,36 @@ const ContactPage: React.FC = () => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error('Please fill in all required fields');
+    
+    if (!validateForm()) {
+      toast.error('Please fix the errors in the form');
       return;
     }
 
@@ -27,7 +52,8 @@ const ContactPage: React.FC = () => {
       await submitContactForm(formData);
       toast.success('Message sent successfully! We\'ll get back to you soon.');
       setFormData({ name: '', email: '', company: '', subject: '', message: '' });
-    } catch (error) {
+      setErrors({});
+    } catch {
       toast.error('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -35,7 +61,12 @@ const ContactPage: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: '' });
+    }
   };
 
   const offices = [
@@ -96,9 +127,11 @@ const ContactPage: React.FC = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 ${
+                      errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                   />
+                  {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -110,9 +143,11 @@ const ContactPage: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 ${
+                      errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                   />
+                  {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
@@ -149,10 +184,12 @@ const ContactPage: React.FC = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 ${
+                      errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                   />
+                  {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
                 </div>
                 <button
                   type="submit"

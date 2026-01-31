@@ -16,6 +16,7 @@ const IndustryDetailPage = lazy(() => import('./pages/IndustryDetailPage'));
 const NewsReportsPage = lazy(() => import('./pages/NewsReportsPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 const queryClient = new QueryClient({
@@ -52,6 +53,7 @@ const App: React.FC = () => {
             <Route path="/news-reports" element={<NewsReportsPage />} />
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/search" element={<SearchPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

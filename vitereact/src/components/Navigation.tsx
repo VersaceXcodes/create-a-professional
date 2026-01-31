@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Search, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -7,7 +7,9 @@ const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +21,17 @@ const Navigation: React.FC = () => {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsSearchOpen(false);
   }, [location.pathname]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -177,21 +189,24 @@ const Navigation: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="p-4">
-                <div className="flex items-center space-x-3">
+                <form onSubmit={handleSearch} className="flex items-center space-x-3">
                   <Search className="w-5 h-5 text-gray-400" />
                   <input
                     type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search articles, reports, and insights..."
                     className="flex-1 outline-none text-lg"
                     autoFocus
                   />
                   <button
                     onClick={() => setIsSearchOpen(false)}
+                    type="button"
                     className="text-gray-400 hover:text-gray-600"
                   >
                     <X className="w-5 h-5" />
                   </button>
-                </div>
+                </form>
               </div>
             </motion.div>
           </motion.div>

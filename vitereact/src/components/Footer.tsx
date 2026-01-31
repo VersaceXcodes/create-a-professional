@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
       await subscribeNewsletter({ email });
       toast.success('Successfully subscribed to our newsletter!');
       setEmail('');
-    } catch (error) {
+    } catch {
       toast.error('Failed to subscribe. Please try again.');
     } finally {
       setIsSubscribing(false);
