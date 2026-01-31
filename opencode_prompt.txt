@@ -1,0 +1,160 @@
+You are continuing an application build. No features are marked complete yet. Your task is to implement ONLY the remaining features.
+
+## Project Context
+- **Platform**: Vite React (Web)
+- **Frontend Root**: /app/vitereact
+- **Backend Root**: /app/backend
+
+### Web App Requirements
+- Use React DOM components (no React Native primitives)
+- Keep changes within the existing Vite boilerplate
+
+## Completed Features (Do NOT modify)
+None yet.
+
+## Remaining Features to Implement
+
+You MUST implement the following 56 features in order:
+
+1. **homepage-hero-section** (ui): Display a prominent hero section on the homepage with the headline 'MENALANE – Connecting Global Capital to MENA Opportunities', background visuals of MENA cities/finance/trade, and primary CTA buttons. This is the first impression and must convey credibility and regional focus immediately.
+2. **homepage-services-overview** (ui): Display an overview section of key services (Investment advisory, Market research, Corporate strategy, Risk analysis) on homepage with brief descriptions and links to detailed service pages. Users need to quickly understand what MENALANE offers.
+3. **homepage-featured-insights** (data): Display 3-4 featured insights/reports on homepage with thumbnails, titles, brief excerpts, and publication dates. This showcases thought leadership and keeps content fresh for returning visitors.
+4. **primary-navigation-menu** (navigation): Implement a sticky top navigation bar with links to all main pages (Home, About, Markets & Insights, Services, Industries, News & Reports, Careers, Contact). Essential for site-wide navigation and professional appearance.
+5. **homepage-market-highlights** (data): Display regional market highlights section showing key metrics, trends, or data points for GCC, North Africa, and Levant regions. Provides immediate value and demonstrates expertise to investors and professionals.
+6. **responsive-mobile-navigation** (navigation): Implement hamburger menu for mobile devices that expands to show all navigation links. Critical for mobile user experience as target audience includes busy professionals on-the-go.
+7. **about-page-mission-vision** (ui): Display About MENALANE page with mission statement, vision, and focus on MENA region. Establishes credibility and helps users understand the platform's purpose and regional expertise.
+8. **markets-insights-landing-page** (ui): Create Markets & Insights landing page with overview and navigation to three regional subsections (GCC, North Africa, Levant). Serves as hub for all market intelligence content.
+9. **markets-gcc-subsection** (data): Display GCC markets subsection with articles, market outlooks, and economic analysis specific to Gulf Cooperation Council countries. Critical for users focused on this high-value region.
+10. **markets-north-africa-subsection** (data): Display North Africa markets subsection with region-specific articles, outlooks, and analysis. Serves investors and businesses interested in North African markets.
+11. **markets-levant-subsection** (data): Display Levant markets subsection with region-specific articles, outlooks, and analysis. Addresses needs of users interested in Levantine markets.
+12. **article-detail-page** (ui): Display full article/insight page with title, author, date, featured image, full content, and related articles. Essential for content consumption and keeping users engaged.
+13. **services-landing-page** (ui): Create Services landing page showcasing all four service offerings with descriptions and CTAs. Helps potential clients understand service offerings and drives lead generation.
+14. **industries-landing-page** (ui): Create Industries landing page showcasing five key sectors (Energy, Finance, Infrastructure, Technology, Real Estate) with navigation to detailed pages. Helps users find sector-specific insights.
+15. **news-reports-listing-page** (data): Display News & Reports page with chronological listing of all updates, articles, and reports with filtering and pagination. Central hub for all published content.
+16. **downloadable-reports-feature** (functional): Enable users to download PDF reports from report detail pages. Key feature for providing value to professional audience and potential lead generation.
+17. **contact-page-form** (functional): Implement professional contact form with fields for name, email, company, subject, and message. Primary channel for lead generation and client inquiries.
+18. **footer-navigation** (navigation): Implement comprehensive footer with links to all main pages, social media, legal pages, and contact info. Standard for professional websites and improves navigation.
+19. **cms-content-management** (functional): Implement CMS backend for managing articles, reports, and page content. Essential for non-technical team to update content regularly.
+20. **mobile-responsive-design** (ui): Ensure all pages are fully responsive and optimized for mobile, tablet, and desktop viewports. Critical as many professionals access content on mobile devices.
+21. **logo-branding-display** (ui): Display MENALANE logo consistently in header with tagline 'Global Insight. Regional Power.' in appropriate locations. Establishes brand identity.
+22. **about-page-values** (ui): Display core values section on About page highlighting credibility, regional expertise, and global standards. Reinforces trust with institutional investors and corporate clients.
+23. **service-investment-advisory-detail** (ui): Display detailed page for Investment Advisory service with comprehensive description, benefits, approach, and contact CTA. Targets investors and asset managers seeking advisory services.
+24. **service-market-research-detail** (ui): Display detailed page for Market Research & Reports service with description, sample reports, and subscription/purchase options. Key revenue driver for the platform.
+25. **service-corporate-strategy-detail** (ui): Display detailed page for Corporate Strategy & Consulting service targeting enterprises and corporations. Explains consulting offerings for MENA market entry and expansion.
+26. **service-risk-analysis-detail** (ui): Display detailed page for Risk & Geopolitical Analysis service. Critical for institutional clients concerned about MENA region stability and risk factors.
+27. **industry-energy-detail** (ui): Display Energy industry page with sector overview, trends, insights, and related articles. Critical given MENA's significance in global energy markets.
+28. **industry-finance-detail** (ui): Display Finance industry page with banking, fintech, and financial services insights for MENA region. Highly relevant to target audience of investors and financial professionals.
+29. **industry-infrastructure-detail** (ui): Display Infrastructure industry page covering construction, transportation, and development projects in MENA. Important for corporate and government audiences.
+30. **industry-technology-detail** (ui): Display Technology industry page covering tech sector growth, startups, and digital transformation in MENA. Appeals to tech investors and innovation-focused audience.
+31. **industry-real-estate-detail** (ui): Display Real Estate industry page covering property markets, development, and investment opportunities in MENA. Targets real estate investors and developers.
+32. **news-reports-filtering** (functional): Implement filtering options for News & Reports by category (region, industry, content type). Helps users quickly find relevant content in growing content library.
+33. **featured-commentary-section** (data): Display featured commentary section on News & Reports page highlighting expert opinions and analysis. Showcases thought leadership and expertise.
+34. **careers-page-overview** (ui): Display Careers page with company culture, benefits, and 'Join MENALANE' messaging emphasizing regional expertise focus. Attracts talent with MENA expertise.
+35. **contact-page-office-locations** (ui): Display MENA office locations with addresses and contact information. Reinforces regional presence and credibility with local clients.
+36. **contact-page-general-inquiry-email** (ui): Display general inquiry email address prominently on Contact page. Provides alternative contact method for users who prefer email.
+37. **footer-social-media-links** (navigation): Display social media icons in footer linking to MENALANE's LinkedIn, Twitter, and other professional platforms. Important for brand presence and engagement.
+38. **search-functionality** (functional): Implement site-wide search allowing users to search articles, reports, and pages by keyword. Critical for users looking for specific content in growing content library.
+39. **newsletter-subscription** (functional): Implement newsletter subscription form in footer or dedicated section to capture emails for updates. Key lead generation and audience building tool.
+40. **loading-states** (ui): Implement loading indicators for all async operations (page loads, form submissions, content fetching). Provides feedback and improves perceived performance.
+41. **error-states** (ui): Implement error messages and states for failed operations (form errors, 404 pages, server errors). Essential for user experience and troubleshooting.
+42. **cms-media-library** (functional): Implement media library in CMS for uploading and managing images, PDFs, and other assets. Necessary for content creators to add visuals to articles.
+43. **page-meta-seo** (functional): Implement proper meta tags (title, description, OG tags) on all pages for SEO and social sharing. Critical for search visibility and professional social media presence.
+44. **performance-optimization** (functional): Optimize page load performance with image compression, lazy loading, and code minification. Essential for professional user experience and SEO.
+45. **typography-system** (ui): Implement consistent typography system with clear hierarchy (headings, body, captions) matching professional corporate style. Essential for readability and brand consistency.
+46. **color-palette-implementation** (ui): Implement dark blue and neutral professional color palette consistently across all pages and components. Establishes brand identity and corporate credibility.
+47. **cta-buttons-consistency** (ui): Implement consistent CTA button styling and placement throughout site (Explore Insights, Contact Us, Learn More, etc.). Drives user actions and conversions.
+48. **form-validation** (functional): Implement client-side form validation for all forms (contact, newsletter, etc.) with clear error messages. Prevents submission errors and improves user experience.
+49. **success-confirmation-messages** (ui): Display success messages after form submissions and user actions. Provides feedback that action was completed successfully.
+50. **careers-job-listings** (data): Display current job openings with titles, locations, and descriptions. Essential for recruiting talent and showing company growth.
+51. **breadcrumb-navigation** (navigation): Implement breadcrumb navigation on all sub-pages showing page hierarchy. Helps users understand site structure and navigate back to parent pages.
+52. **related-content-recommendations** (functional): Display related articles/reports at bottom of content pages based on region, industry, or topic. Increases engagement and time on site.
+53. **content-sharing-buttons** (functional): Add social sharing buttons on article/report pages for LinkedIn, Twitter, and email. Enables content distribution and increases reach.
+54. **structured-data-markup** (functional): Implement schema.org structured data for articles, organization, and breadcrumbs. Improves search engine understanding and rich snippet potential.
+55. **animation-transitions** (ui): Implement subtle animations and smooth transitions for hover states, page transitions, and scroll effects. Enhances premium feel without being distracting.
+56. **back-to-top-button** (navigation): Implement 'back to top' button that appears when scrolling down long pages. Improves navigation on content-heavy pages.
+
+### Implementation Order (Frontend First)
+For each feature, follow this exact order:
+1. **UI First**: Build screens/components with mock data and polished styling.
+2. **Types Second**: Add/adjust shared types/interfaces used by the UI and API.
+3. **Backend Last**: Implement API/database changes and wire the UI to real data.
+
+### Feature Progress Tracking (CRITICAL)
+You MUST update feature_list.json to track progress as you work on each feature:
+
+1. **Before starting a feature**: Update feature_list.json to set `"status": "in_progress"` for that feature
+2. **After completing a feature**: Update feature_list.json to set `"status": "completed"` AND `"passes": true`
+3. **If a feature fails**: Update feature_list.json to set `"status": "failed"` AND add `"errorMessage": "description of what failed"`
+
+Update feature_list.json IMMEDIATELY after completing each feature.
+
+### Implementation Rules
+- Implement each feature fully with proper error handling
+- After implementing each feature, use Playwright MCP to browser test it before marking as complete
+- Navigate to the preview, interact with the feature, and verify it works correctly
+- After implementing each feature, update feature_list.json to set "passes": true
+- After marking a feature complete, call the update_feature_progress tool
+
+## AI Integration (LaunchPulse AI Proxy)
+
+This project has AI integration enabled. Use the LaunchPulse AI wrapper for all AI/LLM operations.
+
+### ⚠️ CRITICAL CONSTRAINTS - DO NOT VIOLATE
+- **DO NOT** run `npm install openai` or any AI SDK
+- **DO NOT** add OPENAI_API_KEY or any AI provider keys to .env
+
+**WHY**: AI is ALREADY configured through LaunchPulse proxy.
+
+### Available AI Components
+- **./__create/ai** - OpenAI-compatible API wrapper
+- **./hooks/useAI** - Hooks: `useChat()` and `useAsk()`
+
+### Usage
+```typescript
+import { ai } from './__create/ai';
+const answer = await ai.ask('Question here');
+
+import { useChat } from './hooks/useAI';
+const { messages, send } = useChat();
+```
+
+### Environment Variables (Auto-Injected)
+- `VITE_LAUNCHPULSE_AI_KEY`
+- `VITE_LAUNCHPULSE_PROJECT_ID`
+- `VITE_LAUNCHPULSE_API_URL`
+
+
+## Database Integration (PostgreSQL via OpenCode Tools)
+
+This project has a PostgreSQL database connected. You have access to database tools:
+
+### Available Database Tools
+- **query_database** - Execute SQL queries (SELECT, INSERT, UPDATE, DELETE). Returns rows and row count.
+- **list_tables** - List all tables in the public schema
+- **describe_table** - Get column information for a specific table (name, type, nullable, default)
+
+### Usage Examples
+```
+// List all tables
+Use the list_tables tool
+
+// Describe a table
+Use the describe_table tool with table_name: "users"
+
+// Run a query
+Use the query_database tool with sql: "SELECT * FROM users LIMIT 5"
+```
+
+### Database Info
+- Database: app_create_a_professional_1769823188988
+- Host: ep-steep-pine-a4cw7wfv.us-east-1.aws.neon.tech
+
+### Schema & Initialization (Generated Apps)
+- Schema file (from backend boilerplate): `/app/backend/db.sql`
+- Apply schema: `cd /app/backend && node initdb.js` (uses DATABASE_URL)
+- Add queries/endpoints in `/app/backend/server.ts` using the existing `pool` from `pg`
+
+### ⚠️ IMPORTANT
+- Always use parameterized queries for user input to prevent SQL injection
+- The database connection uses the project's DATABASE_URL (already configured)
+- These tools connect directly to the user's Neon PostgreSQL database
