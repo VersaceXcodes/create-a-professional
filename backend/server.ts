@@ -8,6 +8,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import multer from 'multer';
+import { v4 as uuidv4 } from 'uuid';
 
 dotenv.config();
 
@@ -17,7 +19,7 @@ const pool = new Pool(
   DATABASE_URL
     ? { 
         connectionString: DATABASE_URL, 
-        ssl: { require: true } 
+        ssl: { rejectUnauthorized: false } 
       }
     : {
         host: PGHOST,
@@ -25,7 +27,7 @@ const pool = new Pool(
         user: PGUSER,
         password: PGPASSWORD,
         port: Number(PGPORT),
-        ssl: { require: true },
+        ssl: { rejectUnauthorized: false },
       }
 );
 
@@ -44,6 +46,40 @@ app.use(express.json({ limit: "5mb" }));
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadDir = path.join(__dirname, 'public', 'uploads');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+    cb(null, uniqueName);
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    // Accept images and PDFs
+    const allowedTypes = /jpeg|jpg|png|gif|webp|pdf/;
+    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = allowedTypes.test(file.mimetype);
+    
+    if (extname && mimetype) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only images and PDF files are allowed'));
+    }
+  }
+});
+
 // Middleware
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Vite default port
@@ -52,7 +88,7 @@ app.use(cors({
 app.use(express.json());
 
 // Auth middleware
-const authenticate_token = async (req, res, next) => {
+const authenticate_token = async (req: any, res: any, next: any) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
@@ -61,7 +97,7 @@ const authenticate_token = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded: any = jwt.verify(token, JWT_SECRET);
     const result = await pool.query(
       'SELECT id, email, name, created_at FROM users WHERE id = $1', 
       [decoded.user_id]
@@ -203,7 +239,7 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 // Verify token endpoint
-app.get('/api/auth/verify', authenticate_token, (req, res) => {
+app.get('/api/auth/verify', authenticate_token, (req: any, res) => {
   res.json({
     message: 'Token is valid',
     user: {
@@ -216,7 +252,7 @@ app.get('/api/auth/verify', authenticate_token, (req, res) => {
 });
 
 // Get current user endpoint
-app.get('/api/auth/me', authenticate_token, (req, res) => {
+app.get('/api/auth/me', authenticate_token, (req: any, res) => {
   res.json({
     user: {
       id: req.user.id,
@@ -228,7 +264,7 @@ app.get('/api/auth/me', authenticate_token, (req, res) => {
 });
 
 // Update user profile endpoint
-app.put('/api/auth/profile', authenticate_token, async (req, res) => {
+app.put('/api/auth/profile', authenticate_token, async (req: any, res) => {
   try {
     const { name } = req.body;
     const user_id = req.user.id;
@@ -258,7 +294,7 @@ app.put('/api/auth/profile', authenticate_token, async (req, res) => {
 });
 
 // Example protected endpoint
-app.get('/api/protected', authenticate_token, (req, res) => {
+app.get('/api/protected', authenticate_token, (req: any, res) => {
   res.json({
     message: 'This is a protected endpoint',
     user: {
@@ -458,6 +494,327 @@ app.post('/api/newsletter/subscribe', async (req, res) => {
     res.status(201).json({ message: 'Successfully subscribed to newsletter' });
   } catch (error) {
     console.error('Error subscribing to newsletter:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// ============================================
+// CMS API ENDPOINTS
+// ============================================
+
+// Get CMS stats
+app.get('/api/cms/stats', async (req, res) => {
+  try {
+    const totalResult = await pool.query('SELECT COUNT(*) FROM content');
+    const publishedResult = await pool.query('SELECT COUNT(*) FROM content WHERE published_at IS NOT NULL');
+    const draftResult = await pool.query('SELECT COUNT(*) FROM content WHERE published_at IS NULL');
+    const mediaResult = await pool.query('SELECT COUNT(*) FROM media');
+
+    res.json({
+      stats: {
+        totalContent: parseInt(totalResult.rows[0].count),
+        publishedContent: parseInt(publishedResult.rows[0].count),
+        draftContent: parseInt(draftResult.rows[0].count),
+        totalMedia: parseInt(mediaResult.rows[0].count)
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching CMS stats:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Get all content for CMS (including drafts)
+app.get('/api/cms/content', async (req, res) => {
+  try {
+    const { type, region, industry, search, limit = 50, offset = 0 } = req.query;
+    let query = `SELECT * FROM content WHERE 1=1`;
+    const params: any[] = [];
+    let paramCount = 1;
+
+    if (type) {
+      query += ` AND content_type = $${paramCount}`;
+      params.push(type);
+      paramCount++;
+    }
+
+    if (region && region !== 'general') {
+      query += ` AND region = $${paramCount}`;
+      params.push(region);
+      paramCount++;
+    }
+
+    if (industry && industry !== 'general') {
+      query += ` AND industry = $${paramCount}`;
+      params.push(industry);
+      paramCount++;
+    }
+
+    if (search) {
+      query += ` AND (title ILIKE $${paramCount} OR excerpt ILIKE $${paramCount} OR content ILIKE $${paramCount})`;
+      params.push(`%${search}%`);
+      paramCount++;
+    }
+
+    query += ` ORDER BY created_at DESC LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
+    params.push(limit, offset);
+
+    const result = await pool.query(query, params);
+    
+    res.json({ 
+      content: result.rows,
+      total: result.rows.length
+    });
+  } catch (error) {
+    console.error('Error fetching CMS content:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Get single content for CMS by ID
+app.get('/api/cms/content/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('SELECT * FROM content WHERE id = $1', [id]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Content not found' });
+    }
+
+    res.json({ content: result.rows[0] });
+  } catch (error) {
+    console.error('Error fetching content:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Create new content
+app.post('/api/cms/content', async (req, res) => {
+  try {
+    const {
+      title,
+      slug,
+      excerpt,
+      content,
+      author,
+      featured_image,
+      content_type,
+      region,
+      industry,
+      is_featured,
+      published_at
+    } = req.body;
+
+    if (!title || !content) {
+      return res.status(400).json({ message: 'Title and content are required' });
+    }
+
+    // Generate slug if not provided
+    const finalSlug = slug || title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+
+    const result = await pool.query(
+      `INSERT INTO content (
+        title, slug, excerpt, content, author, featured_image,
+        content_type, region, industry, is_featured, published_at
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      RETURNING *`,
+      [
+        title,
+        finalSlug,
+        excerpt || null,
+        content,
+        author || null,
+        featured_image || null,
+        content_type || 'article',
+        region || 'general',
+        industry || 'general',
+        is_featured || false,
+        published_at || null
+      ]
+    );
+
+    res.status(201).json({ 
+      message: 'Content created successfully',
+      content: result.rows[0]
+    });
+  } catch (error: any) {
+    console.error('Error creating content:', error);
+    if (error.code === '23505') {
+      return res.status(400).json({ message: 'A content item with this slug already exists' });
+    }
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Update content
+app.put('/api/cms/content/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      title,
+      slug,
+      excerpt,
+      content,
+      author,
+      featured_image,
+      content_type,
+      region,
+      industry,
+      is_featured,
+      published_at
+    } = req.body;
+
+    if (!title || !content) {
+      return res.status(400).json({ message: 'Title and content are required' });
+    }
+
+    const result = await pool.query(
+      `UPDATE content SET
+        title = $1,
+        slug = $2,
+        excerpt = $3,
+        content = $4,
+        author = $5,
+        featured_image = $6,
+        content_type = $7,
+        region = $8,
+        industry = $9,
+        is_featured = $10,
+        published_at = $11,
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $12
+      RETURNING *`,
+      [
+        title,
+        slug,
+        excerpt || null,
+        content,
+        author || null,
+        featured_image || null,
+        content_type || 'article',
+        region || 'general',
+        industry || 'general',
+        is_featured || false,
+        published_at || null,
+        id
+      ]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Content not found' });
+    }
+
+    res.json({ 
+      message: 'Content updated successfully',
+      content: result.rows[0]
+    });
+  } catch (error: any) {
+    console.error('Error updating content:', error);
+    if (error.code === '23505') {
+      return res.status(400).json({ message: 'A content item with this slug already exists' });
+    }
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Delete content
+app.delete('/api/cms/content/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('DELETE FROM content WHERE id = $1 RETURNING *', [id]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Content not found' });
+    }
+
+    res.json({ message: 'Content deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting content:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// ============================================
+// CMS MEDIA LIBRARY ENDPOINTS
+// ============================================
+
+// Get all media files
+app.get('/api/cms/media', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM media ORDER BY created_at DESC'
+    );
+    res.json({ media: result.rows });
+  } catch (error) {
+    console.error('Error fetching media:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Upload media file
+app.post('/api/cms/media/upload', upload.single('file'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+
+    const result = await pool.query(
+      `INSERT INTO media (filename, original_filename, file_type, file_size, url)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING *`,
+      [
+        req.file.filename,
+        req.file.originalname,
+        req.file.mimetype,
+        req.file.size,
+        fileUrl
+      ]
+    );
+
+    res.status(201).json({
+      message: 'File uploaded successfully',
+      media: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    // Clean up uploaded file if database insert fails
+    if (req.file) {
+      const filePath = path.join(__dirname, 'public', 'uploads', req.file.filename);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+    }
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Delete media file
+app.delete('/api/cms/media/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Get file info first
+    const fileResult = await pool.query('SELECT * FROM media WHERE id = $1', [id]);
+    if (fileResult.rows.length === 0) {
+      return res.status(404).json({ message: 'File not found' });
+    }
+
+    const file = fileResult.rows[0];
+    
+    // Delete from database
+    await pool.query('DELETE FROM media WHERE id = $1', [id]);
+    
+    // Delete physical file
+    const filePath = path.join(__dirname, 'public', 'uploads', file.filename);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    res.json({ message: 'File deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting file:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });

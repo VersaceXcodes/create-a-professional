@@ -26,6 +26,8 @@ interface ProductCardProps {
  * Product display card with integrated checkout
  */
 export const ProductCard: React.FC<ProductCardProps> = ({
+  // id is not used but required by the interface
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id,
   name,
   description,

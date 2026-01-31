@@ -19,6 +19,12 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
+// CMS pages
+const CMSDashboardPage = lazy(() => import('./pages/CMSDashboardPage'));
+const CMSContentPage = lazy(() => import('./pages/CMSContentPage'));
+const CMSContentEditorPage = lazy(() => import('./pages/CMSContentEditorPage'));
+const CMSMediaPage = lazy(() => import('./pages/CMSMediaPage'));
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -54,6 +60,14 @@ const App: React.FC = () => {
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/search" element={<SearchPage />} />
+            
+            {/* CMS Routes */}
+            <Route path="/cms" element={<CMSDashboardPage />} />
+            <Route path="/cms/content" element={<CMSContentPage />} />
+            <Route path="/cms/content/new" element={<CMSContentEditorPage />} />
+            <Route path="/cms/content/edit/:id" element={<CMSContentEditorPage />} />
+            <Route path="/cms/media" element={<CMSMediaPage />} />
+            
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

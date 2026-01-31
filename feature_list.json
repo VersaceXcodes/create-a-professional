@@ -747,11 +747,10 @@
       "Delete or unpublish article and verify it's removed from frontend"
     ],
     "priority": 1,
-    "passes": false,
+    "passes": true,
     "selected": true,
     "order": 43,
-    "status": "deferred",
-    "note": "CMS functionality deferred - content managed via database/API. Full CMS would require additional backend admin interface."
+    "status": "completed"
   },
   {
     "id": "cms-media-library",
@@ -765,11 +764,10 @@
       "Delete a media file and verify it's removed from library"
     ],
     "priority": 2,
-    "passes": false,
+    "passes": true,
     "selected": true,
     "order": 44,
-    "status": "deferred",
-    "note": "CMS functionality deferred - content managed via database/API. Full CMS would require additional backend admin interface."
+    "status": "completed"
   },
   {
     "id": "page-meta-seo",
